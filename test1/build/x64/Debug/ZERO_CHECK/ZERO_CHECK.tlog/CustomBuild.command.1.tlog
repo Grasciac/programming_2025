@@ -1,0 +1,10 @@
+^C:\USERS\GEGEE\PROGRAMMING_2025\TEST1\BUILD\CMAKEFILES\7EB6BC4B770641D10E5F9176F25D33E0\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/gegee/programming_2025/test1 -BC:/Users/gegee/programming_2025/test1/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/gegee/programming_2025/test1/build/lecture01_basics.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
