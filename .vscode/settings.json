@@ -1,3 +1,6 @@
 {
-    "cmake.sourceDirectory": "C:/Users/gegee/programming_2025/test1"
+    "cmake.sourceDirectory": "C:/Users/gegee/programming_2025/test1",
+    "files.associations": {
+        "iostream": "cpp"
+    }
 }

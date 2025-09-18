@@ -5,5 +5,9 @@
 .vscode/launch.json
 build
 .vscode
-test1
 out
+main.exe
+*CMakeLists.txt
+*.txt
+.vscode/settings.json
+*.vscode
