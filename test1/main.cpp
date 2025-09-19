@@ -11,8 +11,6 @@ int main() {
 	
 	std::cout << "All is okay!\n" << std::endl; /* \n пропускает строку
 	*/
-	std::cout << "Привет, как дела?\n" <<std::endl;
-	std::cout <<"Hello World and wwwww!";
 	
 	return 0;
 }
