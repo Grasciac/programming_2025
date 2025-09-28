@@ -17,7 +17,7 @@ int main() { //функция мейн
     std:: cout <<"int занимает = " << sizeof(int)*8 << std::endl;
     std:: cout <<"MAX int значение = " << INT_MAX << std::endl;
     std:: cout <<"MIN int значение = " << INT_MIN << std::endl; 
-    std:: cout <<"double занимает = " << sizeof(double) << std::endl;
+    std:: cout <<"double занимает = " << sizeof(double)*8 << std::endl;
     std:: cout <<"MAX double значение = " << __DBL_MAX__ << std::endl;
     std:: cout <<"MIN double значение = " << __DBL_MIN__ << std::endl;
     std:: cout <<"Площадь по формуле герона = " << S << std::endl;
