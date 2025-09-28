@@ -7,7 +7,6 @@ build
 .vscode
 out
 main.exe
-*CMakeLists.txt
 *.txt
 .vscode/settings.json
 *.vscode
