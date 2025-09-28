@@ -7,7 +7,6 @@ build
 .vscode
 out
 main.exe
-*.txt
 .vscode/settings.json
 *.vscode
 test1/null
