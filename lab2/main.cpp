@@ -14,7 +14,7 @@ int main()
   b2 = i;
   std:: cout << "i bit in binary = " <<b2.to_string() << std::endl;
   /*
-  A = (A = !(i & A)? (A * A) & ~i : A = 125 & 0b10101010);  //, вместо всей конструкции if else
+  A = !(i & A)? (A * A) & ~i : A = 125 & 0b10101010;  //, вместо всей конструкции if else
   */
   if (!(i & A)) // не  (i и A) 
   {
