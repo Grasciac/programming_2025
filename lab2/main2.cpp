@@ -45,6 +45,7 @@ int main() {
             break;
         default:
             std:: cout << "Нет данного маршрута, повторите попытку";
+            break;
     }
     return 0;
 }
