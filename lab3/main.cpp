@@ -4,9 +4,9 @@ int main()
 {
     int kc;
     int c;
-    int summa{0};
-    int maxuim{INT_MIN};
-    int number{0};
+    int summa = 0;
+    int maxuim = INT_MIN;
+    int number = 0;
     std::cout << "Количество чисел в последовательности: ";
     std::cin >> kc;
     if ((0 < kc) && (INT_MAX >= kc))
