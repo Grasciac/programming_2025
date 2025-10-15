@@ -18,7 +18,7 @@ int main()
             if ((c % 3 != 0) && (c % 5 != 0) && (c % 7 != 0))
             {
                 summa += c;
-                if (c > maxuim)
+                if ((c > maxuim) || (number == 0))
                 {
                     maxuim = c;
                     number = i + 1;
