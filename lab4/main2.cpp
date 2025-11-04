@@ -25,7 +25,6 @@ int main()
     {
         mass[index][i] = 999;
     }
-
     for (int i = 0; i < ww; ++i)
     {
         for (int j = 0; j < ll; ++j)
