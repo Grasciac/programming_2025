@@ -106,7 +106,7 @@ int main()
     for (int index = 0; index < countToDelete; ++index)
     {
         --rows;
-        int *pointer = arr[tmp[index]];
+        int *pointer = arr[tmp[index]]; // Указатель на строку, которую удаляем
         for (int i = tmp[index]; i < rows; ++i)
         {
             arr[i] = arr[i + 1];
