@@ -1,5 +1,18 @@
 #include <iostream>
 
+void printMatrix(int **matrix, int rows, int columns)
+{
+    for (int i = 0; i < rows; ++i)
+    {
+        for (int j = 0; j < columns; ++j)
+        {
+            std::cout << matrix[i][j] << "\t";
+        }
+        std::cout << std::endl;
+    }
+    std::cout << std::endl;
+}
+
 int *zeroNumbers(int **a, int rows, int cols)
 {
     int zero;
@@ -25,19 +38,28 @@ int main()
     int b;
     int c;
     int d;
-    std::cout << "A = ";
-    std::cin >> a;
-    std::cout << "B = ";
-    std::cin >> b;
-    std::cout << "C = ";
-    std::cin >> c;
-    std::cout << "D = ";
-    std::cin >> d;
-    if ((a < 0) || (b < 0))
+    do
     {
-        std::cout << "Неккоректный ввод переменных(A или B)." << std::endl;
-        return -1;
-    }
+        std::cout << "Введите A (неотрицательное): ";
+        std::cin >> a;
+        if (a < 0)
+        {
+            std::cout << "Ошибка! A должно быть неотрицательным. Повторите ввод." << std::endl;
+        }
+    } while (a < 0);
+    do
+    {
+        std::cout << "Введите B (неотрицательное): ";
+        std::cin >> b;
+        if (b < 0)
+        {
+            std::cout << "Ошибка! B должно быть неотрицательным. Повторите ввод." << std::endl;
+        }
+    } while (b < 0);
+    std::cout << "Введите C: ";
+    std::cin >> c;
+    std::cout << "Введите D: ";
+    std::cin >> d;
     int **arr = nullptr;
     arr = (int **)malloc(2 * sizeof(int *));
     for (int i = 0; i < 2; ++i)
@@ -49,14 +71,7 @@ int main()
     arr[0][1] = b;
     arr[1][0] = c;
     arr[1][1] = d;
-    for (int i = 0; i < 2; ++i)
-    {
-        for (int j = 0; j < 2; ++j)
-        {
-            std::cout << arr[i][j] << "\t";
-        }
-        std::cout << std::endl;
-    }
+    printMatrix(arr, 2, 2);
     int rows = 2 + a;
     int cols = 2 + b;
     arr = (int **)realloc(arr, rows * sizeof(int *));
@@ -83,14 +98,7 @@ int main()
     arr[rows - 1][cols - 2] = c;
     arr[rows - 1][cols - 1] = d;
     std::cout << "Преобразованная начальная матрица: " << std::endl;
-    for (int i = 0; i < rows; ++i)
-    {
-        for (int j = 0; j < cols; ++j)
-        {
-            std::cout << arr[i][j] << "\t";
-        }
-        std::cout << std::endl;
-    }
+    printMatrix(arr, rows, cols);
     std::cout << std::endl;
     int *tmp = zeroNumbers(arr, rows, cols);
     int countToDelete = rows;
@@ -121,14 +129,7 @@ int main()
     {
         arr = (int **)realloc(arr, rows * sizeof(int *));
     }
-    for (int i = 0; i < rows; ++i)
-    {
-        for (int j = 0; j < cols; ++j)
-        {
-            std::cout << arr[i][j] << "\t";
-        }
-        std::cout << std::endl;
-    }
+    printMatrix(arr, rows, cols);
     for (int i = 0; i < rows; ++i)
     {
         free(arr[i]);
