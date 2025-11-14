@@ -15,17 +15,15 @@ void printMatrix(int **matrix, unsigned int rows, int columns)
 
 int *getRowsToDelete(int **matrix, int rows, int columns)
 {
-    int *zeroArray = (int *)malloc(sizeof(int));
-    int count = 0;
+    int *zeroArray = (int *)calloc(1, sizeof(int));
     for (int i = 0; i < rows; ++i)
     {
         for (int j = 0; j < columns; ++j)
         {
             if (matrix[i][j] == 0)
             {
-                ++count;
-                zeroArray[0] = count;
-                zeroArray = (int *)realloc(zeroArray, count * sizeof(int));
+                ++zeroArray[0];
+                zeroArray = (int *)realloc(zeroArray, (zeroArray[0] + 1) * sizeof(int));
                 zeroArray[zeroArray[0]] = i;
                 break;
             }
