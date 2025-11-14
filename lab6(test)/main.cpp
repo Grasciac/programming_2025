@@ -40,7 +40,28 @@ int main()
     int **matrix = (int **)malloc(sizeof(int *) * 2);
     matrix[0] = (int *)malloc(sizeof(int) * 2);
     matrix[1] = (int *)malloc(sizeof(int) * 2);
-    std::cin >> a >> b >> c >> d;
+    do
+    {
+        std::cout << "Введите A (неотрицательное): ";
+        std::cin >> a;
+        if (a < 0)
+        {
+            std::cout << "Ошибка! A должно быть неотрицательным. Повторите ввод." << std::endl;
+        }
+    } while (a < 0);
+    do
+    {
+        std::cout << "Введите B (неотрицательное): ";
+        std::cin >> b;
+        if (b < 0)
+        {
+            std::cout << "Ошибка! B должно быть неотрицательным. Повторите ввод." << std::endl;
+        }
+    } while (b < 0);
+    std::cout << "C = ";
+    std::cin >> c;
+    std::cout << "D = ";
+    std::cin >> d;
     std::cout << "Инициализация и заполнение массива:" << std::endl;
     matrix[0][0] = a;
     matrix[0][1] = b;
