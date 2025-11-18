@@ -93,7 +93,7 @@ int main()
         {
             matrix[i] = matrix[i + 1];
         }
-        for (int i = index; i <= zeroRows[0]; ++i)
+        for (int i = index; i <= zeroRows[0]; ++i) // 0 элемент - количество строк для удаления
         {
             --zeroRows[i];
         }
