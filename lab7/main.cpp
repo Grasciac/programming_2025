@@ -1,9 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <array>
-#include <random>
 #include <ctime>
-#include <iomanip>
 
 void ArrStat(std::array<int, 10> &row)
 {
