@@ -12,13 +12,11 @@ void ArrStat(std::array<int, 10> &row)
     const int MAX_VALUE = 10;
     std::array<int, ARRAY_SIZE> matrix;
     static std::mt19937 rng(static_cast<unsigned int>(time(nullptr)));
-    // Определение равномерного распределения в заданном диапазоне
     std::uniform_int_distribution<int> dist(MIN_VALUE, MAX_VALUE);
     for (size_t i = 0; i < ARRAY_SIZE; ++i)
     {
         matrix[i] = dist(rng);
     }
-    // Вывод полученного массива
     std::cout << "[ ";
     for (const int &element : matrix)
     {
@@ -29,41 +27,55 @@ void ArrStat(std::array<int, 10> &row)
 
 void ChetChislaZnach(std::array<int, 10> row)
 {
+    std::cout << "По значению - ДО сортировки:" << std::endl;
     ArrStat(row);
-    for (int &element : row) // "Для каждого элемента в массиве arr создай ссылку с именем element и выполни тело цикла.
+    for (size_t i = 0; i < row.size() - 1; ++i)
     {
-        if (element % 2 == 0)
+        for (size_t j = 0; j < row.size() - i - 1; ++j)
         {
-            element = 0;
+            if (row[j] > row[j + 1])
+            {
+                std::swap(row[j], row[j + 1]);
+            }
         }
     }
+    std::cout << "По значению - ПОСЛЕ сортировки:" << std::endl;
     ArrStat(row);
 }
 
 void ChetChislaSsilka(std::array<int, 10> &row)
 {
-
+    std::cout << "По ссылке - ДО сортировки:" << std::endl;
     ArrStat(row);
-    for (int &element : row)
+    for (size_t i = 0; i < row.size() - 1; ++i)
     {
-        if (element % 2 == 0)
+        for (size_t j = 0; j < row.size() - i - 1; ++j)
         {
-            element = 0;
+            if (row[j] > row[j + 1])
+            {
+                std::swap(row[j], row[j + 1]);
+            }
         }
     }
+    std::cout << "По ссылке - ПОСЛЕ сортировки:" << std::endl;
     ArrStat(row);
 }
 
 void ChetChislaYkaz(std::array<int, 10> *row)
 {
+    std::cout << "По указателю - ДО сортировки:" << std::endl;
     ArrStat(*row);
-    for (int &element : *row)
+    for (size_t i = 0; i < row->size() - 1; ++i)
     {
-        if (element % 2 == 0)
+        for (size_t j = 0; j < row->size() - i - 1; ++j)
         {
-            element = 0;
+            if ((*row)[j] > (*row)[j + 1])
+            {
+                std::swap((*row)[j], (*row)[j + 1]);
+            }
         }
     }
+    std::cout << "По указателю - ПОСЛЕ сортировки:" << std::endl;
     ArrStat(*row);
 }
 
@@ -107,22 +119,23 @@ void NechetChisla(std::vector<int> row)
     ArrDyn(row);
     std::cout << std::endl;
     bool Hz = false;
-    for (size_t i = 0; i < row.size(); ++i)
-        if (row[i] % 2 != 0)
+    for (int i = row.size() - 1; i >= 0; --i)
+    {
+        if (i % 2 == 0 && row[i] % 2 != 0)
         {
-            row.insert(row.begin() + 1 + i, 0);
+            row.insert(row.begin() + i + 1, 0);
             Hz = true;
-            ++i;
         }
+    }
+
     if (!Hz)
     {
-        row.insert(row.begin(), 0);
-        row.push_back(0);
+        row.insert(row.begin(), -1);
+        row.push_back(-1);
     }
     std::cout << "После: " << std::endl;
     ArrDyn(row);
 }
-
 int main()
 {
     std::array<int, 10> low;
