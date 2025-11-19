@@ -8,21 +8,17 @@
 void ArrStat(std::array<int, 10> &row)
 {
     const size_t ARRAY_SIZE = 10;
-    const int MIN_VALUE = -10;
-    const int MAX_VALUE = 10;
-    std::array<int, ARRAY_SIZE> matrix;
-    static std::mt19937 rng(static_cast<unsigned int>(time(nullptr)));
-    std::uniform_int_distribution<int> dist(MIN_VALUE, MAX_VALUE);
+    std::srand(std::time(0));
     for (size_t i = 0; i < ARRAY_SIZE; ++i)
     {
-        matrix[i] = dist(rng);
+        row[i] = std::rand() % 21 - 10;
     }
-    std::cout << "[ ";
-    for (const int &element : matrix)
+    std::cout << "[";
+    for (const int &element : row)
     {
-        std::cout << std::setw(3) << element << " ";
+        std::cout << element << " ";
     }
-    std::cout << "]" << std::endl;
+    std::cout << "\b]" << std::endl;
 }
 
 void ChetChislaZnach(std::array<int, 10> row)
@@ -110,7 +106,21 @@ void ClearArray(std::vector<int> &row)
 
 void SearchElements(std::vector<int> &row, int a)
 {
-    std::cout << "Элемент массива: " << row[a];
+    bool isFounded = false;
+    std::cout << "Найденные индексы: [";
+    for (int i = 0; i < row.size(); ++i)
+    {
+        if (row[i] == a)
+        {
+            if (isFounded)
+            {
+                std::cout << ", ";
+            }
+            std::cout << i;
+            isFounded = true;
+        }
+    }
+    std::cout << "]" << std::endl;
 }
 
 void NechetChisla(std::vector<int> row)
@@ -150,7 +160,7 @@ int main()
         std::cout << "2. Добавить элемент в начало. " << std::endl;
         std::cout << "3. Добавить элемент в конец. " << std::endl;
         std::cout << "4. Очистка Массива. " << std::endl;
-        std::cout << "5. Поиск элемента по индексу. " << std::endl;
+        std::cout << "5. Поиск индекса по значению. " << std::endl;
         std::cout << "6. Нечетные числа. " << std::endl;
         std::cout << "7. Просмотр массива фиксированной длины: " << std::endl;
         std::cout << "8. Удаление четных чисел(демонстрация разницы передачи аргументов). " << std::endl;
