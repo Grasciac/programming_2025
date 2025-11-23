@@ -19,13 +19,21 @@ void ArrStat(std::array<int, 10> &row)
     std::cout << "\b]" << std::endl;
 }
 
-void ChetChislaZnach(std::array<int, 10> row)
+void vivod(std::array<int, 10> row)
 {
-    std::cout << "По значению - ДО сортировки:" << std::endl;
-    ArrStat(row);
+    std::cout << "[";
+    for (const int &element : row)
+    {
+        std::cout << element << " ";
+    }
+    std::cout << "\b]" << std::endl;
+}
+
+void SorPoZnacheniu(std::array<int, 10> row)
+{
     for (size_t i = 0; i < row.size() - 1; ++i)
     {
-        for (size_t j = 0; j < row.size() - i - 1; ++j)
+        for (size_t j = 0; j < row.size() - 1 - i; ++j)
         {
             if (row[j] > row[j + 1])
             {
@@ -33,17 +41,15 @@ void ChetChislaZnach(std::array<int, 10> row)
             }
         }
     }
-    std::cout << "По значению - ПОСЛЕ сортировки:" << std::endl;
-    ArrStat(row);
+    std::cout << "Функция сортировки: ";
+    vivod(row);
 }
 
-void ChetChislaSsilka(std::array<int, 10> &row)
+void SorPoSsilki(std::array<int, 10> &row)
 {
-    std::cout << "По ссылке - ДО сортировки:" << std::endl;
-    ArrStat(row);
     for (size_t i = 0; i < row.size() - 1; ++i)
     {
-        for (size_t j = 0; j < row.size() - i - 1; ++j)
+        for (size_t j = 0; j < row.size() - 1 - i; ++j)
         {
             if (row[j] > row[j + 1])
             {
@@ -51,17 +57,15 @@ void ChetChislaSsilka(std::array<int, 10> &row)
             }
         }
     }
-    std::cout << "По ссылке - ПОСЛЕ сортировки:" << std::endl;
-    ArrStat(row);
+    std::cout << "Функция сортировки: ";
+    vivod(row);
 }
 
-void ChetChislaYkaz(std::array<int, 10> *row)
+void SorPoYkazatelu(std::array<int, 10> *row)
 {
-    std::cout << "По указателю - ДО сортировки:" << std::endl;
-    ArrStat(*row);
-    for (size_t i = 0; i < row->size() - 1; ++i)
+    for (int i = 0; i < (*row).size() - 1; ++i)
     {
-        for (size_t j = 0; j < row->size() - i - 1; ++j)
+        for (int j = 0; j < (*row).size() - 1 - i; ++j)
         {
             if ((*row)[j] > (*row)[j + 1])
             {
@@ -69,8 +73,8 @@ void ChetChislaYkaz(std::array<int, 10> *row)
             }
         }
     }
-    std::cout << "По указателю - ПОСЛЕ сортировки:" << std::endl;
-    ArrStat(*row);
+    std::cout << "Функция сортировки: ";
+    vivod((*row));
 }
 
 void ArrDyn(std::vector<int> &row)
@@ -201,12 +205,24 @@ int main()
             ArrStat(low);
             break;
         case 8:
-            std::cout << "Удаление четных чисел. ";
-            ChetChislaZnach(low);
+            std::cout << "Сортировка: " << std::endl;
+            std::cout << "До сортировки: ";
+            ArrStat(low);
+            SorPoZnacheniu(low);
+            std::cout << "После сортировки: ";
+            vivod(low);
             std::cout << std::endl;
-            ChetChislaSsilka(low);
+            std::cout << "До сортировки: ";
+            ArrStat(low);
+            SorPoSsilki(low);
+            std::cout << "После сортировки: ";
+            vivod(low);
             std::cout << std::endl;
-            ChetChislaYkaz(&low);
+            std::cout << "До сортировки: ";
+            ArrStat(low);
+            SorPoYkazatelu(&low);
+            std::cout << "После сортировки: ";
+            vivod(low);
             std::cout << std::endl;
             break;
         default:
