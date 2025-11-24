@@ -57,37 +57,12 @@ void SorPoSsilki(std::array<int, 10> &row)
             }
         }
     }
-    std::cout << "Функция сортировки по возрастанию: ";
-    vivod(row);
-
-    for (size_t i = 0; i < row.size() - 1; ++i)
-    {
-        for (size_t j = 0; j < row.size() - 1 - i; ++j)
-        {
-            if (row[j] < row[j + 1])
-            {
-                std::swap(row[j], row[j + 1]);
-            }
-        }
-    }
-    std::cout << "Функция сортировки по убыванию: ";
+    std::cout << "Функция сортировки: ";
     vivod(row);
 }
 
 void SorPoYkazatelu(std::array<int, 10> *row)
 {
-    for (int i = 0; i < (*row).size() - 1; ++i)
-    {
-        for (int j = 0; j < (*row).size() - 1 - i; ++j)
-        {
-            if ((*row)[j] > (*row)[j + 1])
-            {
-                std::swap((*row)[j], (*row)[j + 1]);
-            }
-        }
-    }
-    std::cout << "Функция сортировки по возрастанию: ";
-    vivod((*row));
     for (int i = 0; i < (*row).size() - 1; ++i)
     {
         for (int j = 0; j < (*row).size() - 1 - i; ++j)
@@ -98,7 +73,7 @@ void SorPoYkazatelu(std::array<int, 10> *row)
             }
         }
     }
-    std::cout << "Функция сортировки по убыванию: ";
+    std::cout << "Функция сортировки: ";
     vivod((*row));
 }
 
@@ -190,7 +165,7 @@ int main()
         std::cout << "5. Поиск индекса по значению. " << std::endl;
         std::cout << "6. Нечетные числа. " << std::endl;
         std::cout << "7. Просмотр массива фиксированной длины: " << std::endl;
-        std::cout << "8. Удаление четных чисел(демонстрация разницы передачи аргументов). " << std::endl;
+        std::cout << "8. Сортировка массива (демонстрация разницы передачи аргументов). " << std::endl;
         std::cout << "Выбор пункта: ";
         std::cin >> choice;
         switch (choice)
@@ -231,21 +206,21 @@ int main()
             break;
         case 8:
             std::cout << "Сортировка: " << std::endl;
-            std::cout << "До сортировки: ";
-            ArrStat(low);
-            SorPoZnacheniu(low);
-            std::cout << "После сортировки: ";
-            vivod(low);
-            std::cout << std::endl;
-            std::cout << "До сортировки: ";
+            std::cout << "До сортировки по ссылке: ";
             ArrStat(low);
             SorPoSsilki(low);
             std::cout << "После сортировки: ";
             vivod(low);
             std::cout << std::endl;
-            std::cout << "До сортировки: ";
-            ArrStat(low);
+            std::cout << "До сортировки по указателю: ";
+            vivod(low);
             SorPoYkazatelu(&low);
+            std::cout << "После сортировки: ";
+            vivod(low);
+            std::cout << std::endl;
+            std::cout << "До сортировки по значению: ";
+            vivod(low);
+            SorPoZnacheniu(low);
             std::cout << "После сортировки: ";
             vivod(low);
             std::cout << std::endl;
