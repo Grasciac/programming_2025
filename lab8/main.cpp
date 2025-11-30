@@ -82,7 +82,6 @@ void Create_Vagon(std::vector<Locomotiv> &Locomotivs)
         std::cout << "Неверный номер!" << std::endl;
         return;
     }
-
     int number;
     std::string cargo;
     double weight;
@@ -93,11 +92,9 @@ void Create_Vagon(std::vector<Locomotiv> &Locomotivs)
     std::getline(std::cin, cargo);
     std::cout << "Вес: ";
     std::cin >> weight;
-
     Vagon *newVagon = new Vagon(number, cargo, weight);
     newVagon->next = Locomotivs[train_num - 1].next;
     Locomotivs[train_num - 1].next = newVagon;
-
     std::cout << "Вагон добавлен!" << std::endl;
 }
 
@@ -106,20 +103,16 @@ void Check_Trn(std::vector<Locomotiv> &Locomotivs)
     std::cout << "\nВыберите состав (1-" << Locomotivs.size() << "): ";
     int train_num;
     std::cin >> train_num;
-
     if (train_num < 1 || train_num > Locomotivs.size())
     {
         std::cout << "Неверный номер!" << std::endl;
         return;
     }
-
     std::cout << "\nСостав " << train_num << " (Локомотив ID: " << Locomotivs[train_num - 1].id << ")" << std::endl;
     std::cout << "Вагоны:" << std::endl;
-
     int VagonCount = 0;
     double totalWeight = 0;
     Vagon *current = Locomotivs[train_num - 1].next;
-
     while (current != nullptr)
     {
         std::cout << "  " << current->number << ": "
@@ -128,7 +121,6 @@ void Check_Trn(std::vector<Locomotiv> &Locomotivs)
         totalWeight += current->weight;
         current = current->next;
     }
-
     std::cout << "Всего: " << VagonCount << " вагонов, " << totalWeight << " т" << std::endl;
 }
 
@@ -137,21 +129,17 @@ void Delete_Last_Vagon(std::vector<Locomotiv> &Locomotivs)
     std::cout << "\nОт какого состава отцепить (1-" << Locomotivs.size() << "): ";
     int train_num;
     std::cin >> train_num;
-
     if (train_num < 1 || train_num > Locomotivs.size())
     {
         std::cout << "Неверный номер" << std::endl;
         return;
     }
-
     Vagon *first = Locomotivs[train_num - 1].next;
-
     if (first == nullptr)
     {
         std::cout << "В составе нет вагонов" << std::endl;
         return;
     }
-
     if (first->next == nullptr)
     {
         delete first;
@@ -159,15 +147,12 @@ void Delete_Last_Vagon(std::vector<Locomotiv> &Locomotivs)
         std::cout << "Последний вагон отцеплен!" << std::endl;
         return;
     }
-
-    Vagon *current = first;
-    while (current->next->next != nullptr)
+    while (first->next->next != nullptr)
     {
-        current = current->next;
+        first = first->next;
     }
-
-    delete current->next;
-    current->next = nullptr;
+    delete first->next;
+    first->next = nullptr;
     std::cout << "Последний вагон отцеплен!" << std::endl;
 }
 
@@ -176,19 +161,16 @@ void Int_Sostav(std::vector<Locomotiv> &Locomotivs)
     Create_Loco(Locomotivs);
     Create_Loco(Locomotivs);
     Create_Loco(Locomotivs);
-
     Vagon *w1 = new Vagon(101, "Уголь", 25.5);
     Vagon *w2 = new Vagon(102, "Нефть", 32.1);
     Vagon *w3 = new Vagon(103, "Зерно", 22.3);
     Locomotivs[0].next = w1;
     w1->next = w2;
     w2->next = w3;
-
     Vagon *w4 = new Vagon(201, "Лес", 18.7);
     Vagon *w5 = new Vagon(202, "Бензин", 31.8);
     Locomotivs[1].next = w4;
     w4->next = w5;
-
     Vagon *w6 = new Vagon(301, "Руда", 26.2);
     Vagon *w7 = new Vagon(302, "Продукты", 28.9);
     Vagon *w8 = new Vagon(303, "Контейнеры", 19.5);
