@@ -40,13 +40,11 @@ struct Locomotiv
 void Check_Elem(std::vector<Locomotiv> &Locomotivs)
 {
     std::cout << "\n---ПРОСМОТР---" << std::endl;
-
     std::cout << "Локомотивы:" << std::endl;
     for (int i = 0; i < Locomotivs.size(); i++)
     {
         std::cout << i + 1 << ". ID: " << Locomotivs[i].id << std::endl;
     }
-
     std::cout << "\nСоставы:" << std::endl;
     for (int i = 0; i < Locomotivs.size(); i++)
     {
