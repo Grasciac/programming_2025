@@ -16,6 +16,7 @@ void PrintMenu()
     std::cout << "6. Операция =\n";
     std::cout << "7. Изменить столицу страны\n";
     std::cout << "8. Изменить население страны\n";
+    std::cout << "9. Добавить новую территорию к стране\n";
     std::cout << "Выберите: ";
 }
 
@@ -148,7 +149,20 @@ int main()
                 std::cout << "Население изменено.\n";
             }
         }
-
+        else if (choice == 9)
+        {
+            int idx;
+            long double additionalSquare;
+            std::cout << "Индекс страны: ";
+            std::cin >> idx;
+            if (idx >= 0 && idx < countries.size())
+            {
+                std::cout << "Площадь новой территории (кв. км): ";
+                std::cin >> additionalSquare;
+                countries[idx].addTerritory(additionalSquare);
+                std::cout << "Территория добавлена.\n";
+            }
+        }
     } while (choice != 0);
 
     std::cout << "Выход из программы.\n";

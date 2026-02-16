@@ -22,6 +22,7 @@ public:
     friend Country operator*(const Country &a, const Country &b);
 
     void setCapital(const std::string &capital);
+    void addTerritory(long double additionalSquare);
     void setPopulation(long long population);
     void print() const;
 

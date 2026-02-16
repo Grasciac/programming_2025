@@ -117,6 +117,12 @@ void Country::setPopulation(long long population)
     _population = population;
 }
 
+void Country::addTerritory(long double additionalSquare)
+{
+    if (additionalSquare > 0)
+        _square += additionalSquare;
+}
+
 void Country::print() const
 {
     std::cout << "\n--- Информация о стране ---\n";
