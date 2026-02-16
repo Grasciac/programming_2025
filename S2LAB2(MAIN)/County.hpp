@@ -1,5 +1,4 @@
-#ifndef COUNTRY_H
-#define COUNTRY_H
+#pragma once
 
 #include <string>
 #include <vector>
@@ -10,7 +9,9 @@ public:
     Country();
     Country(const std::string &name, const std::string &capital,
             int day, int month, int year,
-            long double square, const std::vector<std::string> &cities);
+            long double square,
+            long long population,
+            const std::vector<std::string> &cities);
 
     Country(const Country &other);
     Country &operator=(const Country &other);
@@ -21,6 +22,7 @@ public:
     friend Country operator*(const Country &a, const Country &b);
 
     void setCapital(const std::string &capital);
+    void setPopulation(long long population);
     void print() const;
 
 private:
@@ -30,7 +32,6 @@ private:
     int _month = 1;
     int _year = 1;
     long double _square;
+    long long _population;
     std::vector<std::string> _cities;
 };
-
-#endif // COUNTRY_H

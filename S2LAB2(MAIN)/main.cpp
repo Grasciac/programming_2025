@@ -15,6 +15,7 @@ void PrintMenu()
     std::cout << "5. Операция * (путь)\n";
     std::cout << "6. Операция =\n";
     std::cout << "7. Изменить столицу страны\n";
+    std::cout << "8. Изменить население страны\n";
     std::cout << "Выберите: ";
 }
 
@@ -22,9 +23,9 @@ int main()
 {
     std::vector<Country> countries;
     countries.push_back(Country());
-    countries.push_back(Country("Германия", "Берлин", 3, 10, 1990, 357022, {"Берлин", "Гамбург", "Мюнхен"}));
-    countries.push_back(Country("Франция", "Париж", 22, 9, 1792, 551695, {"Париж", "Марсель", "Лион"}));
-    countries.push_back(Country("Япония", "Токио", 11, 2, -660, 377975, {"Токио", "Осака", "Киото"}));
+    countries.push_back(Country("Германия", "Берлин", 3, 10, 1990, 357022, 83000000, {"Берлин", "Гамбург", "Мюнхен"}));
+    countries.push_back(Country("Франция", "Париж", 22, 9, 1792, 551695, 67000000, {"Париж", "Марсель", "Лион"}));
+    countries.push_back(Country("Япония", "Токио", 11, 2, -660, 377975, 125000000, {"Токио", "Осака", "Киото"}));
 
     int choice;
     do
@@ -45,6 +46,7 @@ int main()
             std::string name, capital, city;
             int day, month, year, cityCount;
             long double square;
+            long long population;
             std::vector<std::string> cities;
 
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -61,6 +63,9 @@ int main()
             std::cout << "Площадь: ";
             std::cin >> square;
 
+            std::cout << "Население страны: ";
+            std::cin >> population;
+
             std::cout << "Количество городов: ";
             std::cin >> cityCount;
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -72,7 +77,7 @@ int main()
                 cities.push_back(city);
             }
 
-            countries.push_back(Country(name, capital, day, month, year, square, cities));
+            countries.push_back(Country(name, capital, day, month, year, square, population, cities));
         }
         else if (choice == 3)
         {
@@ -127,6 +132,20 @@ int main()
                 std::getline(std::cin, newCapital);
                 countries[idx].setCapital(newCapital);
                 std::cout << "Столица изменена.\n";
+            }
+        }
+        else if (choice == 8)
+        {
+            int idx;
+            long long newPopulation;
+            std::cout << "Индекс страны: ";
+            std::cin >> idx;
+            if (idx >= 0 && idx < countries.size())
+            {
+                std::cout << "Новое население: ";
+                std::cin >> newPopulation;
+                countries[idx].setPopulation(newPopulation);
+                std::cout << "Население изменено.\n";
             }
         }
 

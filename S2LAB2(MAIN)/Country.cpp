@@ -8,6 +8,7 @@ Country::Country()
     _name = "Россия";
     _capital = "Москва";
     _square = 17100000;
+    _population = 146000000;
     _day = 12;
     _month = 12;
     _year = 1991;
@@ -16,14 +17,17 @@ Country::Country()
 
 Country::Country(const std::string &name, const std::string &capital,
                  int day, int month, int year,
-                 long double square, const std::vector<std::string> &cities)
+                 long double square,
+                 long long population,
+                 const std::vector<std::string> &cities)
     : _name(name), _capital(capital), _day(day), _month(month), _year(year),
-      _square(square), _cities(cities) {}
+      _square(square), _population(population), _cities(cities) {}
 
 Country::Country(const Country &other)
     : _name(other._name), _capital(other._capital),
       _day(other._day), _month(other._month), _year(other._year),
-      _square(other._square), _cities(other._cities) {}
+      _square(other._square), _population(other._population),
+      _cities(other._cities) {}
 
 Country &Country::operator=(const Country &other)
 {
@@ -35,6 +39,7 @@ Country &Country::operator=(const Country &other)
         _month = other._month;
         _year = other._year;
         _square = other._square;
+        _population = other._population;
         _cities = other._cities;
     }
     return *this;
@@ -53,6 +58,7 @@ Country &Country::operator+=(const Country &other)
         _capital = other._capital;
 
     _square += other._square;
+    _population += other._population;
 
     for (const auto &city : other._cities)
     {
@@ -86,6 +92,7 @@ Country operator*(const Country &a, const Country &b)
     result._month = a._month;
     result._year = a._year;
     result._square = (a._square < b._square) ? a._square : b._square;
+    result._population = 0; // путь не имеет населения
 
     result._cities.clear();
     result._cities.push_back(a._capital);
@@ -105,6 +112,11 @@ void Country::setCapital(const std::string &capital)
     _cities.push_back(capital);
 }
 
+void Country::setPopulation(long long population)
+{
+    _population = population;
+}
+
 void Country::print() const
 {
     std::cout << "\n--- Информация о стране ---\n";
@@ -112,6 +124,7 @@ void Country::print() const
     std::cout << "Столица: " << _capital << "\n";
     std::cout << "Дата основания: " << _day << "." << _month << "." << _year << "\n";
     std::cout << "Площадь: " << static_cast<long long>(_square) << " кв. км\n";
+    std::cout << "Население: " << _population << " чел.\n";
     std::cout << "Города: ";
     for (const auto &city : _cities)
         std::cout << city << " ";
