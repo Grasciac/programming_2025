@@ -1,0 +1,49 @@
+#pragma once
+#include <string>
+#include <vector>
+#include "Budget.hpp"
+
+struct City
+{
+    std::string name;
+    long long population;
+    long long availableMoney = 0;
+};
+
+class Country
+{
+public:
+    Country();
+    Country(const std::string &name, const std::string &capital,
+            int day, int month, int year,
+            long double square,
+            long long population,
+            const std::vector<std::string> &cities);
+
+    Country(const Country &other);
+    Country &operator=(const Country &other);
+    ~Country();
+
+    Country &operator+=(const Country &other);
+    friend Country operator+(Country left, const Country &right);
+    friend Country operator*(const Country &a, const Country &b);
+
+    void setCapital(const std::string &capital);
+    void addTerritory(long double additionalSquare);
+    void setPopulation(long long population);
+    void print() const;
+
+    void distributeBudget(const Budget &budget);
+    void printCities() const;
+
+private:
+    std::string _name;
+    std::string _capital;
+    int _day = 1;
+    int _month = 1;
+    int _year = 1;
+    long double _square;
+    long long _population;
+    std::vector<std::string> _cities;
+    std::vector<City> _cityData;
+};
