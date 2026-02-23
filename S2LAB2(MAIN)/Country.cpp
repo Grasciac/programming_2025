@@ -99,9 +99,26 @@ Country operator*(const Country &a, const Country &b)
     result._cities.push_back(b._capital);
 
     if (!a._cities.empty())
-        result._cities.push_back(a._cities[std::rand() % a._cities.size()]);
+    {
+        std::vector<std::string> temp;
+        for (const auto &city : a._cities)
+            if (city != a._capital)
+                temp.push_back(city);
+
+        if (!temp.empty())
+            result._cities.push_back(temp[std::rand() % temp.size()]);
+    }
+
     if (!b._cities.empty())
-        result._cities.push_back(b._cities[std::rand() % b._cities.size()]);
+    {
+        std::vector<std::string> temp;
+        for (const auto &city : b._cities)
+            if (city != b._capital)
+                temp.push_back(city);
+
+        if (!temp.empty())
+            result._cities.push_back(temp[std::rand() % temp.size()]);
+    }
 
     return result;
 }

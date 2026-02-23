@@ -19,7 +19,8 @@ void PrintMenu()
     std::cout << "8. Изменить население страны\n";
     std::cout << "9. Добавить новую территорию к стране\n";
     std::cout << "10. Назначить бюджет стране\n";
-    std::cout << "11. Показать распределение бюджета по городам\n";
+    std::cout << "11. Добавить к существующему бюджету\n";
+    std::cout << "12. Показать распределение бюджета по городам\n";
     std::cout << "Выберите: ";
 }
 
@@ -185,29 +186,49 @@ int main()
                 std::cout << "Территория добавлена.\n";
             }
         }
+
         else if (choice == 10)
         {
             int idx;
-            long long money;
-            double coeff;
-
             std::cout << "Индекс страны: ";
             std::cin >> idx;
 
-            std::cout << "Сумма бюджета: ";
-            std::cin >> money;
+            if (idx >= 0 && idx < countries.size())
+            {
+                long long money;
+                double coeff;
 
-            std::cout << "Коэффициент столицы: ";
-            std::cin >> coeff;
+                std::cout << "Введите бюджет страны: ";
+                std::cin >> money;
+
+                std::cout << "Введите коэффициент для столицы (например 0.2): ";
+                std::cin >> coeff;
+
+                countries[idx].setBudget(money, coeff);
+                countries[idx].distributeBudget();
+
+                std::cout << "Бюджет назначен и распределён по городам.\n";
+            }
+        }
+
+        else if (choice == 11)
+        {
+            int idx;
+            std::cout << "Индекс страны: ";
+            std::cin >> idx;
 
             if (idx >= 0 && idx < countries.size())
             {
-                Budget b(money, coeff);
-                countries[idx].distributeBudget(b);
-                std::cout << "Бюджет распределён.\n";
+                long long addMoney;
+                std::cout << "Введите сумму для добавления к бюджету: ";
+                std::cin >> addMoney;
+
+                countries[idx].addBudget(addMoney);
+                std::cout << "Бюджет добавлен и распределён по городам.\n";
             }
         }
-        else if (choice == 11)
+
+        else if (choice == 12)
         {
             int idx;
             std::cout << "Индекс страны: ";

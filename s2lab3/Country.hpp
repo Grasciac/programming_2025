@@ -32,8 +32,9 @@ public:
     void addTerritory(long double additionalSquare);
     void setPopulation(long long population);
     void print() const;
-
-    void distributeBudget(const Budget &budget);
+    void setBudget(long long money, double coeff);
+    void addBudget(long long amount);
+    void distributeBudget();
     void printCities() const;
 
 private:
@@ -44,6 +45,7 @@ private:
     int _year = 1;
     long double _square;
     long long _population;
-    std::vector<std::string> _cities;
     std::vector<City> _cityData;
+
+    Budget _budget;
 };

@@ -12,9 +12,10 @@ Country::Country()
     _day = 12;
     _month = 12;
     _year = 1991;
-    _cities.push_back("Москва");
 
     _cityData.push_back({"Москва", _population, 0});
+
+    _budget = Budget(1000000000, 0.2); // 1 млрд, 20% столице
 }
 
 Country::Country(const std::string &name, const std::string &capital,
@@ -22,20 +23,32 @@ Country::Country(const std::string &name, const std::string &capital,
                  long double square,
                  long long population,
                  const std::vector<std::string> &cities)
-    : _name(name), _capital(capital), _day(day), _month(month), _year(year),
-      _square(square), _population(population), _cities(cities)
 {
-    for (auto &c : cities)
+    _name = name;
+    _capital = capital;
+    _day = day;
+    _month = month;
+    _year = year;
+    _square = square;
+    _population = population;
+
+    for (size_t i = 0; i < cities.size(); i++)
     {
-        _cityData.push_back({c, population / (int)cities.size(), 0});
+        _cityData.push_back(
+            City{
+                cities[i],
+                population / static_cast<long long>(cities.size()),
+                0});
     }
+
+    _budget = Budget(500000000, 0.2); // 500 млн по умолчанию
 }
 
 Country::Country(const Country &other)
     : _name(other._name), _capital(other._capital),
       _day(other._day), _month(other._month), _year(other._year),
       _square(other._square), _population(other._population),
-      _cities(other._cities), _cityData(other._cityData)
+      _cityData(other._cityData)
 {
 }
 
@@ -50,7 +63,6 @@ Country &Country::operator=(const Country &other)
         _year = other._year;
         _square = other._square;
         _population = other._population;
-        _cities = other._cities;
         _cityData = other._cityData;
     }
     return *this;
@@ -58,7 +70,6 @@ Country &Country::operator=(const Country &other)
 
 Country::~Country()
 {
-    _cities.clear();
     _cityData.clear();
 }
 
@@ -72,8 +83,8 @@ Country &Country::operator+=(const Country &other)
     _square += other._square;
     _population += other._population;
 
-    for (const auto &city : other._cities)
-        _cities.push_back(city);
+    for (const auto &city : other._cityData)
+        _cityData.push_back(city);
 
     return *this;
 }
@@ -98,9 +109,9 @@ Country operator*(const Country &a, const Country &b)
     result._square = (a._square < b._square) ? a._square : b._square;
     result._population = 0;
 
-    result._cities.clear();
-    result._cities.push_back(a._capital);
-    result._cities.push_back(b._capital);
+    result._cityData.clear();
+    result._cityData.push_back({a._capital, 0, 0});
+    result._cityData.push_back({b._capital, 0, 0});
 
     return result;
 }
@@ -108,7 +119,7 @@ Country operator*(const Country &a, const Country &b)
 void Country::setCapital(const std::string &capital)
 {
     _capital = capital;
-    _cities.push_back(capital);
+    _cityData.push_back({capital, 0, 0});
 }
 
 void Country::setPopulation(long long population)
@@ -122,6 +133,58 @@ void Country::addTerritory(long double additionalSquare)
         _square += additionalSquare;
 }
 
+void Country::setBudget(long long money, double coeff)
+{
+    _budget.money = money;
+    _budget.coefficient = coeff;
+}
+
+void Country::addBudget(long long amount)
+{
+    _budget.money += amount;
+    distributeBudget();
+}
+void Country::distributeBudget()
+{
+    if (_cityData.empty())
+        return;
+
+    long long totalPopulation = 0;
+    for (const auto &city : _cityData)
+        totalPopulation += city.population;
+
+    if (totalPopulation == 0)
+        return;
+
+    long long capitalBonus = static_cast<long long>(_budget.money * _budget.coefficient);
+
+    long long remainingBudget = _budget.money - capitalBonus;
+
+    for (auto &city : _cityData)
+    {
+
+        long long share = (city.population * remainingBudget) / totalPopulation;
+        city.availableMoney = share;
+        if (city.name == _capital)
+            city.availableMoney += capitalBonus;
+    }
+}
+
+void Country::printCities() const
+{
+    std::cout << "\n--- Распределение бюджета ---\n";
+
+    for (int i = 0; i < _cityData.size(); i++)
+    {
+        std::cout << _cityData[i].name
+                  << " (население: "
+                  << _cityData[i].population
+                  << ") — "
+                  << _cityData[i].availableMoney
+                  << "\n";
+    }
+}
+
 void Country::print() const
 {
     std::cout << "\n--- Информация о стране ---\n";
@@ -131,34 +194,7 @@ void Country::print() const
     std::cout << "Площадь: " << static_cast<long long>(_square) << " кв. км\n";
     std::cout << "Население: " << _population << " чел.\n";
     std::cout << "Города: ";
-    for (auto &city : _cities)
-        std::cout << city << " ";
+    for (const auto &city : _cityData)
+        std::cout << city.name << " ";
     std::cout << "\n";
-}
-
-void Country::distributeBudget(const Budget &budget)
-{
-    long long totalPop = 0;
-    for (auto &c : _cityData)
-        totalPop += c.population;
-
-    if (totalPop == 0)
-        return;
-
-    long long capitalBonus = static_cast<long long>(budget.money * budget.coefficient);
-
-    for (auto &c : _cityData)
-    {
-        long long share = (c.population * (budget.money - capitalBonus)) / totalPop;
-        c.availableMoney = share;
-        if (c.name == _capital)
-            c.availableMoney += capitalBonus;
-    }
-}
-
-void Country::printCities() const
-{
-    std::cout << "\n--- Распределение бюджета по городам ---\n";
-    for (auto &c : _cityData)
-        std::cout << c.name << " (" << c.population << " чел.): " << c.availableMoney << "\n";
 }
