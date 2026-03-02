@@ -56,5 +56,6 @@
         "bitset": "cpp",
         "iomanip": "cpp",
         "sstream": "cpp"
-    }
+    },
+    "files.encoding": "windows1251"
 }
